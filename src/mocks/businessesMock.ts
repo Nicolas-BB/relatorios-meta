@@ -1,0 +1,57 @@
+export const businessesMock = {
+    data: [
+        { id: '4042011272697703', name: 'dramarialuizamoreira 1' },
+        { id: '3544846842208677', name: 'Máfia Burguer' }
+        // { id: '2821031981514519', name: 'reginacinefotos' },
+        // { id: '2641740099464361', name: 'agragadesenvolvimentos' },
+        // { id: '2057472581068646', name: 'Resultados - Agência Digital' },
+        // { id: '1736975913124452', name: 'gabrielaalves_estetica' },
+        // { id: '1659669771309998', name: 'BM Julia ' },
+        // { id: '1659313520942268', name: 'Ágile Soluções Empresariais' },
+        // { id: '1452617535983314', name: 'Ivaiporã Multimarcas' },
+        // { id: '1321468131659434', name: 'Danieli Kusminski - Principal' },
+        // { id: '1285184336136886', name: 'mdutraassessoria' },
+        // { id: '1262221248154290', name: 'Scarlet Flow' },
+        // { id: '1137085796690058', name: 'Harmoniê Estética' },
+        // { id: '1070586533335501', name: 'DR.Lorena' },
+        // { id: '946990847315792', name: 'Naturaliz Ivaiporã' },
+        // { id: '929498108195018', name: 'Metalúrgica torno ivai' },
+        // { id: '894042299281761', name: 'Xandi Lisboa Flores' },
+        // { id: '864457648195993', name: 'Xandi Lisboa' },
+        // { id: '775753000025210', name: 'La Pasta Trattoria' },
+        // { id: '732237444185146', name: 'Cheiro Verde Hortifruti' },
+        // { id: '709366647060384', name: 'Dr-humberto' },
+        // { id: '691320888944926', name: 'Optoclínica - Saúde visual' },
+        // { id: '681359605568422', name: 'BRConnect' },
+        // { id: '670660259235156', name: 'Clinica maheli' },
+        // { id: '619127422566129', name: 'rubiacalsavara' },
+        // { id: '595657006618998', name: 'BM loterias vale do Ivaí' },
+        // { id: '594443116247030', name: 'Emporio Molise' },
+        // { id: '520778528689289', name: 'INOVE ESTÉTICA' },
+        // { id: '491066948463019', name: 'Emylyn Barbist' },
+        // { id: '433816710913522', name: 'Thaís Alves Pimenta' },
+        // { id: '415317398321848', name: 'Viva la Vida ' },
+        // { id: '404188576100825', name: 'Bar e Restaurante do Zé' },
+        // { id: '390934406422882', name: 'TB Planejados' },
+        // { id: '381546969182413', name: 'Geovanna Messias' },
+        // { id: '379943269789963', name: 'memoriasnopapell' },
+        // { id: '365019871119912', name: 'Localizze' },
+        // { id: '344114150765267', name: 'Clinica Crescer' },
+        // { id: '306856329874409', name: 'Érica Girassol �' },
+        // { id: '282371779791581', name: 'sofashowvaledoivai' },
+        // { id: '275524843873819', name: 'academia.wellness.ivp' },
+        // { id: '255794682740680', name: 'referencia.digital' },
+        // { id: '228706957822532', name: 'Ivaí Piscinas' },
+        // { id: '214520246539867', name: 'Milena Grisólia' },
+        // { id: '199511770721167', name: 'Óticas Plaza' },
+        // { id: '141522155206238', name: 'Aqui Tem CHURRASCO' },
+        // { id: '139678901079658', name: 'Scarlet Caroline' },
+        // { id: '116555747563796', name: 'pedacinhodoceuivp' }
+    ],
+    paging: {
+        cursors: {
+            before: 'QVFIU0ZAFc0xtNDdiSjFKa1hzdEFPUElZAZAWI0d2trUzR6djBWdk1mTUZA0cFZAfMzVqQVBvSTZAaVUFtMTlOYmVpb1pqSWtVRFFEVy0wMXBmOHVIdHJJcjhGX19B',
+            after: 'QVFIU3E2MHlSbVZA4Y0cwMlhKWG96RFFRWDB1ZAlM2WXN3dTV2UWF0eWVTYWptM1NWdW05UEc3UUh2bGJhT09ZAQWdPMVNLM29QT2xubjRuT1BkZAUp0Wkt6cmtn'
+        }
+    }
+}
