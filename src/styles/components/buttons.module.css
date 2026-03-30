@@ -1,0 +1,21 @@
+.primary {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    font: var(--font-button);
+    color: var(--text-title-dark);
+    background-color: var(--foreground);
+    padding: 16px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.primary:hover {
+    background-color: #2a7cff;
+}
+
+.primary:active {
+    background-color: #0059e7;
+}

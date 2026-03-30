@@ -1,5 +1,5 @@
 .table {
-    width: 100%;
+    width: 60dvw;
     border-collapse: collapse;
 }
 
@@ -7,11 +7,21 @@
 .table td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid black;
 }
 
 .table thead {
     position: sticky;
     top: 0;
-    background-color: black;
+    background-color: var(--background);
+}
+
+.table th {
+    font: var(--font-h3);
+    color: var(--text-title-light);
+}
+
+.table td {
+    font: var(--font-body);
+    color: var(--text-body-light);
 }

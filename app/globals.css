@@ -1,14 +1,23 @@
-html, body {
-  all: unset;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-  --background: #000000;
-  --foreground: #FFFFFF;
+  --background: #FFFFFF;
+  --foreground: #0766FF;
 
-  --h3-font: normal bold 16px/24px 'Inter', sans-serif;
-  --body-font: normal normal 16px/24px 'Inter', sans-serif;
-  --button-font: normal bold 16px/1 'Inter', sans-serif;
+  --font-h1: normal bold 48px/48px 'Inter', sans-serif;
+  --font-h3: normal bold 16px/24px 'Inter', sans-serif;
+  --font-body: normal normal 16px/24px 'Inter', sans-serif;
+  --font-button: normal bold 16px/1 'Inter', sans-serif;
+
+  --text-title-light: #1f2937;
+  --text-body-light: #374151;
+  --text-caption-light: #6b7280;
+
+  --text-title-dark: #e5e7eb;
+  --text-body-dark: #d1d5db;
+  --text-caption-dark: #9ca3af;
 }
