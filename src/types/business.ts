@@ -62,5 +62,6 @@ export type pgAccount = {
     balance: number,
     status: string,
     updated: string,
-    type?: string | null
+    type: string | null,
+    show: boolean
 }

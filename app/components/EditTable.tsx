@@ -16,6 +16,7 @@ export default function EditTable({ data, onChange }: { data: pgAccount[], onCha
                     <th>Nome</th>
                     <th>Mínimo</th>
                     <th>Tipo</th>
+                    <th>Mostrar</th>
                 </tr>
             </thead>
             <tbody>

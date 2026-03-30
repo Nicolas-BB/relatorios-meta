@@ -9,7 +9,7 @@ export default function Row({ data, onChange }: { data: pgAccount, onChange: (up
         setMinimum(value)
         onChange({ ...data, minimum: value === '' ? null : value, type })
     }
-    
+
     const handleTypeChange = (value: string) => {
         setType(value)
         onChange({ ...data, minimum: minimum === '' ? null : minimum, type: value })
@@ -38,6 +38,9 @@ export default function Row({ data, onChange }: { data: pgAccount, onChange: (up
                     <option value="Pix">Pix</option>
                     <option value="Cartão">Cartão</option>
                 </select>
+            </td>
+            <td>
+                <input type="checkbox" name="show" id="show" checked={data.show} />
             </td>
         </tr>
     )
