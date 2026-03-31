@@ -4,7 +4,7 @@ import SideBar from "./components/SideBar";
 import TopBar from "./components/TopBar";
 
 export const metadata: Metadata = {
-  title: "Editorial Intelligence - Relatório de Saldos",
+  title: "RD System - Relatórios",
   description: "Visão consolidada das contas e saúde financeira operacional.",
 };
 
