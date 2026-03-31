@@ -21,11 +21,6 @@ export default function Row({ data }: { data: pgAccount }) {
         second: '2-digit'
     })
 
-    const minimumBrl = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format(data.minimum)
-
     const status = data.minimum !== 0 && Number(data.balance) >= Number(data.minimum) ? 'Ok' : 'Atenção'
 
     return (
