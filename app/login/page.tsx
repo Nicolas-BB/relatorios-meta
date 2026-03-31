@@ -45,8 +45,8 @@ export default function LoginPage() {
                     <div className="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center text-white mx-auto mb-4">
                         <span className="material-symbols-outlined text-3xl" data-icon="analytics">analytics</span>
                     </div>
-                    <h1 className="text-2xl font-black text-on-surface uppercase tracking-widest text-sm">Curator Pro</h1>
-                    <p className="text-xs text-on-surface-variant font-medium mt-1">Acesso Restrito Módulo Enterprise</p>
+                    <h1 className="text-2xl font-black text-on-surface uppercase tracking-widest text-sm">RD System</h1>
+                    <p className="text-xs text-on-surface-variant font-medium mt-1">Acesso ao painel de relatórios</p>
                 </div>
 
                 <form onSubmit={handleLogin} className="space-y-6">

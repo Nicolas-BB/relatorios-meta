@@ -26,8 +26,8 @@ export default function SideBar() {
                     <span className="material-symbols-outlined" data-icon="analytics">analytics</span>
                 </div>
                 <div>
-                    <h1 className="font-black text-on-surface dark:text-white uppercase tracking-widest text-sm">Curator Pro</h1>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Enterprise Edition</p>
+                    <h1 className="font-black text-on-surface dark:text-white uppercase tracking-widest text-sm">RD System</h1>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Painel de relatórios</p>
                 </div>
             </div>
             <nav className="flex-1 flex flex-col gap-1">
@@ -46,7 +46,7 @@ export default function SideBar() {
                 ))}
             </nav>
             <div className="mt-auto pt-4 border-t border-outline-variant/10">
-                <button 
+                <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-slate-400 hover:bg-surface-container-high dark:hover:bg-slate-800 rounded-xl transition-all cursor-pointer"
                 >
