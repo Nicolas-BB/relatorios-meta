@@ -22,7 +22,7 @@ export async function loopOverBusinesses(data: BusinessResponse) {
                 balance: brl
             }
 
-            brl !== 0 && await upsertBalance(accountInfo)
+            brl !== 0 && upsertBalance(accountInfo)
         }
     }
 }

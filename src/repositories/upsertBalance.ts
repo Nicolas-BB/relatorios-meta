@@ -1,5 +1,5 @@
-import type { AccountInfo } from "../types/business";
 import { pool } from "../lib/db";
+import type { AccountInfo } from "../types/business";
 
 export async function upsertBalance(data: AccountInfo) {
     await pool.query(`

@@ -2,8 +2,8 @@
 
 import { PgAccount } from "@/src/types/business"
 import { useEffect, useState } from "react"
-import { Button } from "../components/Button"
-import EditTable from "../components/EditTable"
+import { Button } from "../../components/Button"
+import EditTable from "../../components/EditTable"
 
 export default function Dashboard() {
     const [businessList, setBusinessList] = useState<PgAccount[]>([])

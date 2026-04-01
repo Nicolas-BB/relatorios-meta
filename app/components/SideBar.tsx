@@ -11,8 +11,9 @@ export default function SideBar() {
     if (pathname === '/login') return null
 
     const navItems = [
-        { name: 'Dashboard', href: '/dashboard', icon: 'dashboard' },
-        { name: 'Edit', href: '/edit', icon: 'edit' },
+        { name: 'Saldos', href: '/saldos', icon: 'account_balance' },
+        { name: 'Edit', href: '/saldos/edit', icon: 'edit' },
+        { name: 'Leads', href: '/leads', icon: 'visibility' },
     ]
 
     const handleLogout = async () => {

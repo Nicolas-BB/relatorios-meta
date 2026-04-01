@@ -16,11 +16,11 @@ export async function getAdAccounts(data: Business): Promise<AdAccountsResponse>
             throw new Error(`Response status: ${response.status}`)
         }
 
-        const json: AdAccountsResponse = await response.json()
+        const data: AdAccountsResponse = await response.json()
 
-        console.log('getAdAccounts =', json)
+        console.log('getAdAccounts =', data)
 
-        return json
+        return data
     }
     catch (error) {
         console.error((error as Error).message)
