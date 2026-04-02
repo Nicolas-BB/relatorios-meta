@@ -12,21 +12,21 @@ export default function Dashboard() {
         a.name.localeCompare(b.name)
     ))
 
-    async function getBalances() {
-        const res = await fetch('/api/get-balances')
+    async function listBalances() {
+        const res = await fetch('/api/list-balances')
         const data = await res.json()
         setBusinessList(data)
     }
 
     useEffect(() => {
-        getBalances()
+        listBalances()
     }, [])
 
-    async function updateBalances() {
+    async function getBalances() {
         try {
             setLoading(true)
-            await fetch('/api/sync-balances')
-            await getBalances()
+            await fetch('/api/get-balances')
+            await listBalances()
         }
         finally {
             setLoading(false)
@@ -55,7 +55,7 @@ export default function Dashboard() {
                     <h1 className="text-4xl font-bold text-on-surface tracking-tight leading-none mb-2">Relatório de Saldos</h1>
                     <p className="text-on-surface-variant font-medium">Visão consolidada das contas e saúde financeira operacional.</p>
                 </div>
-                <Link 
+                <Link
                     href="/saldos/edit"
                     className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
                 >
@@ -67,7 +67,7 @@ export default function Dashboard() {
             {/* Bento Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                {/* Summary Card 2: Contas OK */}
+                {/* Summary Card 1: Contas OK */}
                 <div className="bg-surface-container-lowest p-6 rounded-xl shadow-[4px_0_24px_-4px_rgba(44,52,55,0.06)] group">
                     <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">Contas OK</p>
                     <div className="flex items-center justify-between">
@@ -79,7 +79,7 @@ export default function Dashboard() {
                     <p className="mt-4 text-xs text-on-surface-variant">Todas as contas acima do mínimo estabelecido.</p>
                 </div>
 
-                {/* Summary Card 3: Contas em Atenção */}
+                {/* Summary Card 2: Contas em Atenção */}
                 <div className={`bg-surface-container-lowest p-6 rounded-xl shadow-[4px_0_24px_-4px_rgba(44,52,55,0.06)] group ${contasWarning > 0 ? 'border-l-4 border-error' : ''}`}>
                     <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">Em Atenção</p>
                     <div className="flex items-center justify-between">
@@ -93,8 +93,8 @@ export default function Dashboard() {
                     </p>
                 </div>
 
-                {/* Summary Card 4: Próxima Atualização */}
-                <div className="bg-primary p-6 rounded-xl shadow-lg shadow-primary/20 text-white relative overflow-hidden flex flex-col justify-between">
+                {/* Summary Card 3: Próxima Atualização */}
+                {/* <div className="bg-primary p-6 rounded-xl shadow-lg shadow-primary/20 text-white relative overflow-hidden flex flex-col justify-between">
                     <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
                     <div>
                         <p className="text-xs font-bold opacity-80 uppercase tracking-widest mb-4">Status do Sistema</p>
@@ -105,13 +105,13 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <button
-                        onClick={updateBalances}
+                        onClick={getBalances}
                         disabled={loading}
                         className="mt-4 w-full bg-white/20 hover:bg-white/30 disabled:opacity-50 py-2 rounded-lg text-xs font-bold uppercase transition-colors"
                     >
                         {loading ? 'Sincronizando...' : 'Forçar Sync'}
                     </button>
-                </div>
+                </div> */}
             </div>
 
             {/* Main Data Table Container */}

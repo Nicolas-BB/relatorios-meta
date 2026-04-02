@@ -1,6 +1,6 @@
 import { pool } from "@/src/lib/db"
 
-export async function getBalances() {
+export async function listBalances() {
     const res = await pool.query(
         `SELECT * FROM meta.balances`
     )
