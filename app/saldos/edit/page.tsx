@@ -12,8 +12,8 @@ export default function Dashboard() {
         a.name.localeCompare(b.name)
     ))
 
-    async function getBalances() {
-        const res = await fetch('/api/get-balances')
+    async function listBalances() {
+        const res = await fetch('/api/list-balances')
         const data = await res.json()
         setBusinessList(data)
     }
@@ -36,7 +36,7 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        getBalances()
+        listBalances()
     }, [])
 
     return (
