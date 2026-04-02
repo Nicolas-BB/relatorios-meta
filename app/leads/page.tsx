@@ -105,7 +105,7 @@ export default function Leads() {
                 <div className="lg:col-span-1 border-none bg-transparent shadow-none hidden lg:block"></div>
 
                 {/* Summary Card 3: Sync System */}
-                <div className="bg-primary p-6 rounded-xl shadow-lg shadow-primary/20 text-white relative overflow-hidden flex flex-col justify-between">
+                {/* <div className="bg-primary p-6 rounded-xl shadow-lg shadow-primary/20 text-white relative overflow-hidden flex flex-col justify-between">
                     <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
                     <div>
                         <p className="text-xs font-bold opacity-80 uppercase tracking-widest mb-4">Sincronização Meta</p>
@@ -128,7 +128,7 @@ export default function Leads() {
                     >
                         {isSyncing ? 'Sincronizando...' : 'Forçar Sync c/ Meta'}
                     </button>
-                </div>
+                </div> */}
             </div>
 
             {/* Table and Filters Section */}
