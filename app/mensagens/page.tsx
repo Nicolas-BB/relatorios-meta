@@ -42,7 +42,9 @@ export default function Mensagens() {
                 };
             });
 
-            setCombinedData(merged);
+            const sorted = merged.sort((a, b) => a.business.localeCompare(b.business));
+
+            setCombinedData(sorted);
         } catch (error) {
             console.error("Erro ao carregar dados:", error);
         } finally {
