@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import Table from "../components/Table"
 import Link from "next/link"
 
-export default function Dashboard() {
+export default function Saldos() {
     const [businessList, setBusinessList] = useState<PgAccount[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const sortedList: PgAccount[] = [...businessList].sort((a, b) => (

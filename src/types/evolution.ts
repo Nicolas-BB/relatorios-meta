@@ -1,5 +1,6 @@
 export type FetchGroups = {
     id: string,
+    name?: string,
     subject: string,
     subjectTime: number,
     pictureUrl: string,
@@ -15,9 +16,9 @@ export type FetchGroups = {
 export type dbBusinessMessaging = {
     id: string,
     business: string,
-    phone: string,
+    phone: string, // grupo
     message: string,
-    days: number[],
-    format: string,
+    weekdays: number[],
+    format: 'semanal' | 'diario',
     active: boolean
 }

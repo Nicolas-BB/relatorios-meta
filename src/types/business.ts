@@ -78,3 +78,12 @@ export type LeadData = {
     total: number;
     date: string;
 }
+export type Mensagem = {
+    id: string,
+    conta: string,
+    mensagem: string,
+    grupo: string,
+    formato: string,
+    dias_semana: string[],
+    ativo: boolean
+}

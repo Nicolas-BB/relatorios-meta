@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listLeads } from "@/src/services/listLeads";
+import { listLeads } from "@/src/repositories/listLeads";
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);

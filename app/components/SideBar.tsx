@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import logo from '../../public/logo.png'
 import Link from 'next/link'
@@ -15,6 +16,26 @@ export default function SideBar() {
         { name: 'Leads', href: '/leads', icon: 'visibility' },
         { name: 'Mensagens', href: '/mensagens', icon: 'message' },
     ]
+
+    const [isSyncing, setIsSyncing] = useState(false)
+
+    const handleSync = async () => {
+        try {
+            setIsSyncing(true)
+            const res = await fetch('/api/get-businesses')
+            if (res.ok) {
+                alert('BMs sincronizados com sucesso!')
+                router.refresh()
+            } else {
+                alert('Erro ao sincronizar BMs.')
+            }
+        } catch (error) {
+            console.error(error)
+            alert('Erro ao sincronizar BMs.')
+        } finally {
+            setIsSyncing(false)
+        }
+    }
 
     const handleLogout = async () => {
         await fetch('/api/auth/logout', { method: 'POST' })
@@ -45,7 +66,21 @@ export default function SideBar() {
                     </Link>
                 ))}
             </nav>
-            <div className="mt-auto pt-4 border-t border-outline-variant/10">
+            <div className="mt-auto">
+                <button
+                    onClick={handleSync}
+                    disabled={isSyncing}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-slate-400 hover:bg-surface-container-high dark:hover:bg-slate-800 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                >
+                    <span className={`material-symbols-outlined ${isSyncing ? 'animate-spin' : ''}`} data-icon="sync">
+                        {isSyncing ? 'progress_activity' : 'sync'}
+                    </span>
+                    <span className="font-medium text-sm tracking-wide">
+                        {isSyncing ? 'Sincronizando...' : 'Sincronizar BMs'}
+                    </span>
+                </button>
+            </div>
+            <div className="pt-4 border-t border-outline-variant/10">
                 <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-slate-400 hover:bg-surface-container-high dark:hover:bg-slate-800 rounded-xl transition-all cursor-pointer"

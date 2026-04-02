@@ -1,6 +1,7 @@
 import 'dotenv/config'
+import type { FetchGroups } from '../types/evolution'
 
-export async function getGroups() {
+export async function getGroups(): Promise<FetchGroups[]> {
     const url: string = 'https://baseservidor-evolution-api.kwlyqm.easypanel.host/group/fetchAllGroups/RD?getParticipants=false'
 
     try {
@@ -8,11 +9,13 @@ export async function getGroups() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.EVOLUTION_API_KEY}`
+                'apikey': `${process.env.EVOLUTION_API_KEY}`
             }
         })
 
-        const data = await response.json()
+        const data: FetchGroups[] = await response.json()
+
+        console.log(data)
 
         return data
     }

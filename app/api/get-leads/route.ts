@@ -1,24 +1,24 @@
 import { insertLeads } from "@/src/repositories/insertLeads";
+import { listBusinesses } from "@/src/repositories/listBusinesses";
+import { listMessaging } from "@/src/repositories/listMessaging";
 import { getAdAccounts } from "@/src/services/getAdAccounts";
-import { getBusinesses } from "@/src/services/getBusinesses";
 import { getDailyLeads } from "@/src/services/getDailyLeads";
-import { AdAccountsResponse, BmLead, BusinessResponse } from "@/src/types/business";
+import { sendMessage } from "@/src/services/sendMessage";
+import { AdAccountsResponse, BmLead } from "@/src/types/business";
+import { dbBusinessMessaging } from "@/src/types/evolution";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    const businesses: BusinessResponse = await getBusinesses()
+    const businesses = await listBusinesses()
+    const messagingConfigs: dbBusinessMessaging[] = await listMessaging() as any[]
 
-    for (const business of businesses.data) {
+    for (const business of businesses) {
         const accounts: AdAccountsResponse = await getAdAccounts(business)
 
         let leadCount: number = 0
 
-        business.id === '681359605568422' && console.log(business)
-
         for (const account of accounts.data) {
             const leads = await getDailyLeads(account.id)
-
-            business.id === '681359605568422' && console.log('leads = ', leads.data?.[0]?.actions?.[0]?.value)
 
             leadCount += Number(leads.data?.[0]?.actions?.[0]?.value ?? 0)
         }
@@ -29,9 +29,14 @@ export async function GET() {
             total: leadCount
         }
 
-        // console.log('businessLeads = ', businessLeads)
+        // Save to DB
+        await insertLeads(businessLeads)
 
-        insertLeads(businessLeads)
+        // Find messaging config and send message
+        const config = messagingConfigs.find(c => c.id === business.id)
+        if (config) {
+            await sendMessage(config, leadCount)
+        }
     }
 
     return NextResponse.json({ ok: true })
