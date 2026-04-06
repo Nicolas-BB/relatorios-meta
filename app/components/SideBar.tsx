@@ -8,6 +8,7 @@ import Link from 'next/link'
 export default function SideBar() {
     const pathname = usePathname()
     const router = useRouter()
+    const [isSyncing, setIsSyncing] = useState(false)
 
     if (pathname === '/login') return null
 
@@ -16,8 +17,6 @@ export default function SideBar() {
         { name: 'Leads', href: '/leads', icon: 'visibility' },
         { name: 'Mensagens', href: '/mensagens', icon: 'message' },
     ]
-
-    const [isSyncing, setIsSyncing] = useState(false)
 
     const handleSync = async () => {
         try {
