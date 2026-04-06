@@ -47,6 +47,29 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const renderFormattedMessage = (text: string, isPreview: boolean) => {
+        const parts = text.split(/(\*.*?\*|\{\{leads\}\})/g);
+        return parts.map((part, i) => {
+            if (part === '{{leads}}') {
+                if (isPreview) return '127';
+                return (
+                    <span key={i} className="text-primary bg-primary/20 rounded-sm outline outline-1 outline-primary/10">
+                        {part}
+                    </span>
+                );
+            }
+            if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+                const content = part.slice(1, -1);
+                return (
+                    <strong key={i} className="font-bold">
+                        {isPreview ? content : part}
+                    </strong>
+                );
+            }
+            return part;
+        });
+    };
+
     const handleSave = async () => {
         try {
             setIsSaving(true);
@@ -110,21 +133,17 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
                                 </button>
                             </div>
 
-                            <p className="text-xs text-on-surface-variant mb-4">
-                                Dica: Utilize <span className="font-mono bg-primary/10 text-primary px-1 rounded whitespace-nowrap">{'{{leads}}'}</span> para injetar a quantidade de leads capturados na mensagem enviada.
+                            <p className="text-xs text-on-surface-variant mb-4 font-medium italic">
+                                Dica: Utilize <span className="font-mono bg-primary/10 text-primary px-1 rounded whitespace-nowrap">{'{{leads}}'}</span> para dinâmico e <span className="font-mono bg-surface-container-highest text-on-surface px-1 rounded whitespace-nowrap">*texto*</span> para <span className="font-bold">negrito</span>.
                             </p>
 
                             <div className="relative w-full h-48 bg-surface-container-low border border-outline-variant/30 rounded-xl overflow-hidden mb-6">
                                 {/* Highlighter Layer */}
                                 <div
-                                    className="absolute inset-0 p-4 text-sm font-sans pointer-events-none whitespace-pre-wrap overflow-hidden break-words"
+                                    className="absolute inset-0 p-4 text-sm font-sans pointer-events-none whitespace-pre-wrap overflow-hidden break-words text-on-surface"
                                     aria-hidden="true"
                                 >
-                                    {message.split(/(\{\{leads\}\})/g).map((part, i) => (
-                                        part === '{{leads}}'
-                                            ? <span key={i} className="text-primary bg-primary/20 rounded-sm outline outline-1 outline-primary/10">{part}</span>
-                                            : <span key={i} className="text-on-surface">{part}</span>
-                                    ))}
+                                    {renderFormattedMessage(message, false)}
                                     {!message && <span className="text-on-surface-variant opacity-50">Sua mensagem...</span>}
                                 </div>
                                 {/* Input Layer */}
@@ -137,12 +156,36 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
                                 />
                             </div>
 
-                            <div className="flex justify-end mt-4">
+                            <div className="mb-2">
+                                <h4 className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-3 px-1">Visualização no WhatsApp</h4>
+                                <div className="bg-[#e5ddd5] dark:bg-[#0b141a] p-6 rounded-xl relative overflow-hidden min-h-[120px] flex flex-col justify-center border border-outline-variant/5">
+                                    {/* Simulating WhatsApp Background Pattern */}
+                                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://whatsapp-clone-react-js.netlify.app/static/media/bg-chat-light.6ef99017.png')] bg-repeat"></div>
+                                    
+                                    <div className="relative z-10 flex flex-col items-end">
+                                        <div className="bg-[#dcf8c6] dark:bg-[#005c4b] text-[#303030] dark:text-[#e9edef] p-3 rounded-lg rounded-tr-none max-w-[90%] shadow-sm relative text-[13px] leading-relaxed min-w-[120px]">
+                                            <div className="whitespace-pre-wrap break-words">
+                                                {renderFormattedMessage(message || "Sua mensagem aparecerá aqui...", true)}
+                                            </div>
+                                            <div className="text-[9px] opacity-60 text-right mt-1 flex items-center justify-end gap-1">
+                                                12:45
+                                                <span className="material-symbols-outlined text-[14px] text-[#53bdeb] scale-90" style={{ fontVariationSettings: "'FILL' 1" }}>done_all</span>
+                                            </div>
+                                            {/* The "tail" of the bubble */}
+                                            <svg className="absolute -right-[8px] top-0 text-[#dcf8c6] dark:text-[#005c4b] fill-current" width="8" height="13" viewBox="0 0 8 13">
+                                                <path d="M5.188 0H0v11.193l6.467-8.273C7.335 1.83 6.448 0 5.188 0z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end mt-6">
                                 <button
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-6 py-2 text-sm font-bold bg-primary text-on-primary shadow-sm hover:shadow-md rounded-lg transition-all"
+                                    className="px-8 py-2.5 text-sm font-bold bg-primary text-on-primary shadow-lg shadow-primary/20 hover:shadow-primary/30 rounded-xl transition-all active:scale-95"
                                 >
-                                    Concluído
+                                    Confirmar Mensagem
                                 </button>
                             </div>
                         </div>
