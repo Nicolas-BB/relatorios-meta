@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { dbBusinessMessaging, FetchGroups } from "@/src/types/evolution";
 
 interface MensagensRowProps {
@@ -15,6 +15,13 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
     const [weekdays, setWeekdays] = useState<number[]>(data.weekdays || []);
     const [active, setActive] = useState(data.active ?? false);
     const [isSaving, setIsSaving] = useState(false);
+    const highlighterRef = useRef<HTMLDivElement>(null);
+
+    const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+        if (highlighterRef.current) {
+            highlighterRef.current.scrollTop = e.currentTarget.scrollTop;
+        }
+    };
 
     const daysOptions = [
         { label: 'dom', value: 0 },
@@ -121,8 +128,8 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
                 </button>
 
                 {isModalOpen && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
-                        <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-2xl w-full max-w-2xl border border-outline-variant/10 text-left">
+                    <div className="fixed inset-0 z-[100] flex items-start justify-center bg-black/50 backdrop-blur-sm px-4 py-8 overflow-y-auto">
+                        <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-2xl w-full max-w-2xl border border-outline-variant/10 text-left my-auto">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-lg font-bold text-on-surface">Editar Mensagem</h3>
                                 <button
@@ -137,9 +144,10 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
                                 Dica: Utilize <span className="font-mono bg-primary/10 text-primary px-1 rounded whitespace-nowrap">{'{{leads}}'}</span> para dinâmico e <span className="font-mono bg-surface-container-highest text-on-surface px-1 rounded whitespace-nowrap">*texto*</span> para <span className="font-bold">negrito</span>.
                             </p>
 
-                            <div className="relative w-full h-48 bg-surface-container-low border border-outline-variant/30 rounded-xl overflow-hidden mb-6">
+                            <div className="relative w-full h-48 bg-surface-container-low border border-outline-variant/30 rounded-xl mb-6 overflow-hidden">
                                 {/* Highlighter Layer */}
                                 <div
+                                    ref={highlighterRef}
                                     className="absolute inset-0 p-4 text-sm font-sans pointer-events-none whitespace-pre-wrap overflow-hidden break-words text-on-surface"
                                     aria-hidden="true"
                                 >
@@ -150,8 +158,9 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
                                 <textarea
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
+                                    onScroll={handleScroll}
                                     placeholder="Sua mensagem..."
-                                    className="absolute inset-0 w-full h-full p-4 text-sm font-sans bg-transparent border-none focus:ring-2 focus:ring-primary/50 focus:outline-none text-transparent caret-on-surface placeholder:text-transparent resize-none z-10"
+                                    className="absolute inset-0 w-full h-full p-4 text-sm font-sans bg-transparent border-none focus:ring-2 focus:ring-primary/50 focus:outline-none text-transparent caret-on-surface placeholder:text-transparent resize-none z-10 overflow-y-auto"
                                     spellCheck={false}
                                 />
                             </div>
