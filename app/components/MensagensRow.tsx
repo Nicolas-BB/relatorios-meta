@@ -15,6 +15,15 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
     const [weekdays, setWeekdays] = useState<number[]>(data.weekdays || []);
     const [active, setActive] = useState(data.active ?? false);
     const [isSaving, setIsSaving] = useState(false);
+    const [savedData, setSavedData] = useState(data);
+
+    const isDirty = 
+        message !== (savedData.message || "") ||
+        phone !== (savedData.phone || "") ||
+        format !== (savedData.format || "diario") ||
+        JSON.stringify([...weekdays].sort()) !== JSON.stringify([...(savedData.weekdays || [])].sort()) ||
+        active !== (savedData.active ?? false);
+
     const highlighterRef = useRef<HTMLDivElement>(null);
 
     const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
@@ -98,6 +107,7 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
 
             if (!res.ok) throw new Error('Falha ao salvar');
 
+            setSavedData(payload);
             // Optional: visual feedback for success
         } catch (error) {
             console.error(error);
@@ -108,7 +118,7 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
     };
 
     return (
-        <tr className="hover:bg-surface-container-high transition-colors">
+        <tr className={`hover:bg-surface-container-high transition-all border-l-4 ${isDirty ? 'border-amber-500 bg-amber-500/[0.02]' : 'border-transparent'}`}>
             <td className="px-4 py-5 font-mono text-[10px] text-on-surface-variant font-medium">{data.id}</td>
             <td className="px-4 py-5 text-sm font-semibold text-on-surface whitespace-nowrap">{data.business}</td>
 
@@ -264,15 +274,25 @@ export default function MensagensRow({ data, groups }: MensagensRowProps) {
                 <button
                     onClick={handleSave}
                     disabled={isSaving}
-                    className={`p-2 rounded-full transition-all ${isSaving
+                    className={`p-2 rounded-full transition-all relative ${isSaving
                         ? 'bg-surface-container-highest text-on-surface-variant animate-pulse'
-                        : 'bg-primary/10 text-primary hover:bg-primary hover:text-on-primary shadow-sm hover:shadow-md'
+                        : isDirty 
+                            ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30 hover:bg-amber-600 scale-110'
+                            : 'bg-primary/10 text-primary hover:bg-primary hover:text-on-primary shadow-sm hover:shadow-md'
                         }`}
-                    title="Salvar"
+                    title={isDirty ? "Salvar alterações pendentes" : "Salvar"}
                 >
                     <span className="material-symbols-outlined text-lg">
                         {isSaving ? 'progress_activity' : 'save'}
                     </span>
+                    {isDirty && !isSaving && (
+                        <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-4 w-4 bg-amber-500 border-2 border-surface-container-lowest flex items-center justify-center">
+                                <span className="text-[10px] text-white font-black">!</span>
+                            </span>
+                        </span>
+                    )}
                 </button>
             </td>
         </tr>

@@ -2,11 +2,11 @@
     "crons": [
         {
             "path": "/api/get-leads",
-            "schedule": "0 8 * * *"
+            "schedule": "0 11 * * *"
         },
         {
             "path": "/api/get-balances",
-            "schedule": "0 8 * * *"
+            "schedule": "0 11 * * *"
         }
     ]
 }

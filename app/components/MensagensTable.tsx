@@ -14,7 +14,7 @@ export default function MensagensTable({ data, groups }: MensagensTableProps) {
                     <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest w-[100px]">ID BM</th>
                     <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest w-[150px]">Conta</th>
                     <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest min-w-[250px]">Mensagem</th>
-                    <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest w-[180px]">Grupo</th>
+                    <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest w-[280px]">Grupo</th>
                     <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest w-[120px]">Formato</th>
                     <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest w-[160px]">Dias da Semana</th>
                     <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-center w-[80px]">Ativo</th>
