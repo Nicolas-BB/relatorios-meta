@@ -134,32 +134,38 @@ export default function LoginPage() {
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleLogin}>
-                        <Label htmlFor='email'>Usuário</Label>
-                        <InputGroup>
-                            <InputGroupInput
-                                placeholder='Usuário'
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                            <InputGroupAddon>
-                                <User />
-                            </InputGroupAddon>
-                        </InputGroup>
-                        <Label htmlFor='password'>Senha</Label>
-                        <InputGroup>
-                            <InputGroupInput
-                                placeholder='Senha'
-                                type={showPassword ? 'text' : 'password'}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <InputGroupAddon>
-                                <Lock />
-                            </InputGroupAddon>
-                            <InputGroupAddon align='inline-end'>
-                                <Button variant='ghost' size='icon' type='button' onClick={handleShowPassword}>
-                                    {showPassword ? <EyeOff /> : <Eye />}
-                                </Button>
-                            </InputGroupAddon>
-                        </InputGroup>
+                        <div className='flex flex-col gap-6'>
+                            <div className='flex flex-col gap-2'>
+                                <Label htmlFor='email'>Usuário</Label>
+                                <InputGroup>
+                                    <InputGroupInput
+                                        placeholder='Usuário'
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                    <InputGroupAddon>
+                                        <User />
+                                    </InputGroupAddon>
+                                </InputGroup>
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <Label htmlFor='password'>Senha</Label>
+                                <InputGroup>
+                                    <InputGroupInput
+                                        placeholder='Senha'
+                                        type={showPassword ? 'text' : 'password'}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    <InputGroupAddon>
+                                        <Lock />
+                                    </InputGroupAddon>
+                                    <InputGroupAddon align='inline-end'>
+                                        <Button variant='ghost' size='icon' type='button' onClick={handleShowPassword}>
+                                            {showPassword ? <EyeOff /> : <Eye />}
+                                        </Button>
+                                    </InputGroupAddon>
+                                </InputGroup>
+                            </div>
+                        </div>
                     </form>
                 </CardContent>
                 <CardFooter>
