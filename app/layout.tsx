@@ -8,7 +8,7 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: "RD System - Relatórios",
@@ -27,24 +27,24 @@ export default function RootLayout({
 
       <body className="min-h-full bg-background text-on-surface font-inter antialiased">
         <Providers>
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-            >
-              <TooltipProvider>
-                <SidebarProvider>
-                  <AppSidebar />
-                  <SidebarInset>
-                    <TopBar />
-                    <div className="p-8">
-                      {children}
-                    </div>
-                  </SidebarInset>
-                </SidebarProvider>
-              </TooltipProvider>
-            </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>
+              <SidebarProvider>
+                <AppSidebar />
+                <SidebarInset>
+                  <TopBar />
+                  <div className="p-8">
+                    {children}
+                  </div>
+                </SidebarInset>
+              </SidebarProvider>
+            </TooltipProvider>
+          </ThemeProvider>
         </Providers>
       </body>
     </html>
