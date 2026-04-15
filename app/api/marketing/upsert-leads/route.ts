@@ -9,15 +9,18 @@ export async function POST(req: Request) {
 
     if (!res.leads?.[0]?.personal_phone || !res.leads?.[0]?.name) return NextResponse.json({ success: false, error: 'Dados inválidos' })
 
+    const phone = res.leads[0].personal_phone
+    const name = res.leads[0].name
+
     const data: LeadInfo = {
-        phone: res.leads?.[0].personal_phone!,
-        name: res.leads?.[0].name!
+        phone,
+        name
     }
 
     upsertLead(data)
 
-    if (res.leads[0].personal_phone === '5543998077983') {
-        await sendMessage('5543998077983', 'Lead recebido!')
+    if (phone === '5543998077983' || phone === '5543996034144') {
+        await sendMessage(phone, 'Lead recebido!')
     }
 
     return NextResponse.json({ ok: true })
