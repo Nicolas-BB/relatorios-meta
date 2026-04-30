@@ -28,7 +28,15 @@ export default function RdStation() {
     // Filters
     const [startDate, setStartDate] = useState<string>(defaultDate)
     const [endDate, setEndDate] = useState<string>(defaultDate)
-    // const [leadFilter, setLeadFilter] = useState<string>('')
+    const [leadFilter, setLeadFilter] = useState<string>('')
+
+    const filteredAndSortedLeads = leadsList
+        .filter(lead => {
+            if (!leadFilter) return true;
+            const term = leadFilter.toLowerCase();
+            return lead.name?.toLowerCase().includes(term) || lead.phone?.toLowerCase().includes(term);
+        })
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
     const getLeadsList = useCallback(async () => {
         try {
@@ -69,16 +77,19 @@ export default function RdStation() {
                     <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest whitespace-nowrap">Listagem de Leads</h4>
 
                     <div className="flex flex-wrap gap-4 items-center w-full justify-end">
-                        {/* <div className="flex flex-col gap-1 w-full sm:w-auto">
-                            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-1">Buscar Conta</label>
+                        <div className="flex flex-col gap-1 w-full sm:w-auto">
+                            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-1">Buscar Lead</label>
                             <input
                                 type="text"
-                                placeholder="Nome da conta..."
+                                placeholder="Nome ou telefone..."
                                 value={leadFilter}
-                                onChange={(e) => setLeadFilter(e.target.value)}
+                                onChange={(e) => {
+                                    setLeadFilter(e.target.value)
+                                    setCurrentPage(1)
+                                }}
                                 className="bg-muted focus:ring-1 focus:ring-primary transition-all text-xs px-4 py-2 rounded-lg outline-none w-full min-w-[200px]"
                             />
-                        </div> */}
+                        </div>
 
                         {/* <div className="flex items-center gap-2">
                             <div className="flex flex-col gap-1">
@@ -114,7 +125,7 @@ export default function RdStation() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {leadsList.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((lead, index) => {
+                            {filteredAndSortedLeads.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((lead, index) => {
                                 const formattedDate = new Date(lead.created_at).toLocaleDateString('pt-BR', {
                                     day: '2-digit',
                                     month: '2-digit',
@@ -130,7 +141,7 @@ export default function RdStation() {
                                     </TableRow>
                                 );
                             })}
-                            {leadsList.length === 0 && !loading && (
+                            {filteredAndSortedLeads.length === 0 && !loading && (
                                 <TableRow>
                                     <TableCell colSpan={3} className="px-6 py-8 text-center text-muted-foreground text-sm">
                                         Nenhum lead encontrado para os filtros selecionados.
@@ -146,14 +157,14 @@ export default function RdStation() {
                     )}
                 </div>
 
-                {leadsList.length > 0 && (
+                {filteredAndSortedLeads.length > 0 && (
                     <div className="px-6 py-4 border-t flex items-center justify-between">
                         <p className="text-sm text-muted-foreground">
                             Mostrando <span className="font-medium text-foreground">{((currentPage - 1) * ITEMS_PER_PAGE) + 1}</span> a{' '}
                             <span className="font-medium text-foreground">
-                                {Math.min(currentPage * ITEMS_PER_PAGE, leadsList.length)}
+                                {Math.min(currentPage * ITEMS_PER_PAGE, filteredAndSortedLeads.length)}
                             </span>{' '}
-                            de <span className="font-medium text-foreground">{leadsList.length}</span> resultados
+                            de <span className="font-medium text-foreground">{filteredAndSortedLeads.length}</span> resultados
                         </p>
                         <div className="flex items-center gap-2">
                             <Button
@@ -168,8 +179,8 @@ export default function RdStation() {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(leadsList.length / ITEMS_PER_PAGE)))}
-                                disabled={currentPage >= Math.ceil(leadsList.length / ITEMS_PER_PAGE) || loading}
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredAndSortedLeads.length / ITEMS_PER_PAGE)))}
+                                disabled={currentPage >= Math.ceil(filteredAndSortedLeads.length / ITEMS_PER_PAGE) || loading}
                             >
                                 Próxima
                                 <ChevronRight className="h-4 w-4 ml-1" />
