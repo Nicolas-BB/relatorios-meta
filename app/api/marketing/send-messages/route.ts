@@ -33,14 +33,6 @@ export async function POST() {
 
     if (!leads) return NextResponse.json({ success: false, error: 'Erro ao buscar leads' })
 
-    // for (const lead of leads) {
-    //     const result = await sendMessageCloudAPI(lead.phone, message)
-
-    //     if (!result.success) {
-    //         console.error(`Erro ao enviar mensagem para ${lead.phone}: ${result.error}`)
-    //     }
-    // }
-
     const limit = pLimit(5)
 
     await Promise.all(
