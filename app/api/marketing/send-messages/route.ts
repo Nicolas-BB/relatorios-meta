@@ -19,7 +19,7 @@ export async function POST() {
     // const hoursUTC = 12
 
     // O horário de envio é 3 horas a mais do que o horário atual porque o servidor está em UTC
-    if (![7, 4, 1, 0, -1, -3, -4, -5].includes(days) || ![(9 + 3), (18 + 3), (19 + 3), (20 + 3)].includes(hoursUTC)) return NextResponse.json({ success: false, error: 'Não é o dia ou horário de envio' })
+    if (![7, 4, 1, 0, -1, -2, -3, -4, -5].includes(days) || ![(9 + 3), (18 + 3), (13 + 3), (19 + 3), (20 + 3)].includes(hoursUTC)) return NextResponse.json({ success: false, error: 'Não é o dia ou horário de envio' })
 
     const key = `${days}/${hoursUTC - 3}`
 

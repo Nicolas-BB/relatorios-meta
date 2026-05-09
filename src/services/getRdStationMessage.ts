@@ -7,6 +7,7 @@ export async function getRdStationMessage(key: string): Promise<string> {
         '0/20': 'lipedema_ao_vivo',
         '-1/9': 'lipedema_replay1',
         '-1/18': 'lipedema_replay2',
+        '-2/13': 'lipedema_chamada',
         '-3/9': 'lipedema_melhores_momentos1',
         '-4/9': 'lipedema_melhores_momentos2',
         '-5/9': 'lipedema_encerra_hoje',
